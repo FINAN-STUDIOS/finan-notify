@@ -1,0 +1,90 @@
+:root {
+    --notify-width: 380px;
+    --notify-gap: 10px;
+    --edge-offset: 24px;
+    --animation-duration: 320ms;
+    --surface: rgba(10, 10, 11, 0.94);
+    --surface-raised: rgba(20, 20, 22, 0.97);
+    --text: #f5f5f5;
+    --muted: #a4a4aa;
+    --line: rgba(255, 255, 255, 0.11);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: transparent;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.notifications {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    gap: var(--notify-gap);
+    width: min(var(--notify-width), calc(100vw - 32px));
+    pointer-events: none;
+}
+
+.position-top-left { top: var(--edge-offset); left: var(--edge-offset); }
+.position-top-center { top: var(--edge-offset); left: 50%; transform: translateX(-50%); }
+.position-top-right { top: var(--edge-offset); right: var(--edge-offset); }
+.position-bottom-left { bottom: var(--edge-offset); left: var(--edge-offset); flex-direction: column-reverse; }
+.position-bottom-center { bottom: var(--edge-offset); left: 50%; transform: translateX(-50%); flex-direction: column-reverse; }
+.position-bottom-right { bottom: var(--edge-offset); right: var(--edge-offset); flex-direction: column-reverse; }
+
+.notification {
+    --accent: #f5f5f5;
+    position: relative;
+    display: grid;
+    grid-template-columns: 3px 36px minmax(0, 1fr);
+    min-height: 78px;
+    overflow: hidden;
+    color: var(--text);
+    background: linear-gradient(135deg, var(--surface-raised), var(--surface));
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.32);
+    pointer-events: auto;
+    backdrop-filter: blur(14px);
+    animation: notify-in var(--animation-duration) cubic-bezier(.2, .8, .2, 1) both;
+}
+
+.notification.is-leaving { animation: notify-out var(--animation-duration) ease-in both; }
+.notification--success { --accent: #e9e9e9; }
+.notification--error { --accent: #ffffff; }
+.notification--warning { --accent: #c9c9c9; }
+.notification--info { --accent: #9d9da4; }
+
+.notification__accent { background: var(--accent); }
+.notification__icon { display: grid; place-items: center; color: var(--accent); }
+.notification__icon svg { width: 18px; height: 18px; }
+.notification__content { min-width: 0; padding: 15px 16px 17px 7px; }
+.notification__eyebrow { margin: 0 0 5px; color: var(--text); font-size: 11px; font-weight: 750; letter-spacing: .13em; line-height: 1.2; text-transform: uppercase; }
+.notification__message { margin: 0; color: var(--muted); font-size: 13px; font-weight: 450; line-height: 1.45; overflow-wrap: anywhere; }
+.notification__progress { position: absolute; right: 0; bottom: 0; left: 3px; height: 2px; transform-origin: left; background: var(--accent); opacity: .72; animation: progress linear forwards; }
+.notification:hover .notification__progress.is-paused { animation-play-state: paused; }
+
+@keyframes notify-in {
+    from { opacity: 0; transform: translate3d(22px, -4px, 0) scale(.97); }
+    to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+@keyframes notify-out {
+    to { opacity: 0; transform: translate3d(18px, 0, 0) scale(.98); }
+}
+@keyframes progress { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+
+@media (max-width: 600px) {
+    .notifications { right: 16px; left: 16px; width: auto; transform: none; }
+    .position-top-left, .position-top-center, .position-top-right { top: 16px; }
+    .position-bottom-left, .position-bottom-center, .position-bottom-right { bottom: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .notification, .notification.is-leaving { animation-duration: 1ms; }
+}
+
