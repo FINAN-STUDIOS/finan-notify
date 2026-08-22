@@ -4,4 +4,5 @@ Thumbs.db
 .idea/
 .vscode/
 release/*.zip
+release/*.sha256
 html/preview.html

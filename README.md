@@ -10,8 +10,9 @@ FINAN Notify is a polished, lightweight notification resource for FiveM. It prov
 
 - Four notification types: `success`, `error`, `info`, and `warning`
 - Framework-agnostic client event and export APIs
-- Optional server export and rate-limited server relay
+- Server export for trusted server-side resources
 - Queue with configurable simultaneous notification limit
+- Bounded waiting queue with oldest-entry replacement
 - Responsive black-and-white interface with accessible live regions
 - Automatic dismissal, progress indicator, and pause on hover
 - Configurable position, duration, dimensions, spacing, and animation speed
@@ -45,10 +46,10 @@ All public settings are in `config.lua`.
 | `Config.Defaults` | Default type and duration | `info`, `5000` ms |
 | `Config.UI.position` | Stack position on screen | `top-right` |
 | `Config.UI.maxVisible` | Maximum visible notifications | `5` |
+| `Config.UI.maxQueued` | Maximum waiting notifications | `25` |
 | `Config.UI.showProgress` | Shows the lifetime indicator | `true` |
 | `Config.UI.pauseOnHover` | Pauses dismissal while hovered | `true` |
 | `Config.Limits` | Duration and text safety limits | See file |
-| `Config.ServerEvent` | Client-to-server relay and cooldown | Enabled, `250` ms |
 
 Supported positions are `top-left`, `top-center`, `top-right`, `bottom-left`, `bottom-center`, and `bottom-right`.
 
@@ -99,19 +100,6 @@ TriggerClientEvent('finan_notify:notify', source, {
     message = 'Vehicle retrieved successfully'
 })
 ```
-
-### Server event
-
-A client can notify itself through the optional rate-limited relay:
-
-```lua
-TriggerServerEvent('finan_notify:server:notify', {
-    type = 'info',
-    message = 'Preferences saved'
-})
-```
-
-Disable this API with `Config.ServerEvent.enabled = false` if your project does not use it. Never use client-supplied data to target other players.
 
 ## Server export
 
@@ -185,7 +173,7 @@ Omitting `title` uses the matching entry in the configured locale. Add another l
 
 ## Performance and security
 
-The resource has no permanent Lua loop. Work is performed only on resource startup or when a notification arrives, so idle client script time should report approximately `0.00 ms`. NUI content is written using `textContent`; notification text is never interpreted as HTML. The relay event only sends back to its source and applies a per-player cooldown.
+The resource has no permanent Lua loop. Work is performed only on resource startup or when a notification arrives, so idle client script time should report approximately `0.00 ms`. NUI content is written using `textContent`; notification text is never interpreted as HTML. Both Lua and NUI validate notification types, text, and duration. The bounded waiting queue prevents unrestrained memory growth during bursts. FINAN Notify intentionally exposes no client-to-server notification event; clients should use the local export or event, while trusted server resources use `NotifyPlayer`.
 
 ## License
 
@@ -194,4 +182,3 @@ Copyright © 2026 FINAN STUDIOS. Distributed under the proprietary [FINAN STUDIO
 ## Support
 
 When reporting an issue, include the FINAN Notify version, FiveM artifact version, framework (if any), reproduction steps, and relevant console output. Do not include credentials or server secrets.
-

@@ -44,6 +44,10 @@ local function normalize(payload, title, message, duration)
     end
 
     local normalizedDuration = tonumber(payload.duration) or Config.Defaults.duration
+    if normalizedDuration ~= normalizedDuration then
+        debugLog('Rejected notification with an invalid duration')
+        return nil
+    end
     normalizedDuration = math.floor(math.max(Config.Limits.minDuration, math.min(Config.Limits.maxDuration, normalizedDuration)))
 
     return {
@@ -71,7 +75,8 @@ exports('Notify', notify)
 local function configureUI()
     SendNUIMessage({
         action = 'configure',
-        config = Config.UI
+        config = Config.UI,
+        limits = Config.Limits
     })
 end
 

@@ -12,6 +12,7 @@ Config.Defaults = {
 Config.UI = {
     position = 'top-right', -- top-left, top-center, top-right, bottom-left, bottom-center, bottom-right
     maxVisible = 5,
+    maxQueued = 25, -- oldest queued notification is replaced when this limit is reached
     gap = 10,
     edgeOffset = 24,
     width = 380,
@@ -28,9 +29,3 @@ Config.Limits = {
     titleLength = 64,
     messageLength = 280
 }
-
-Config.ServerEvent = {
-    enabled = true,
-    cooldown = 250 -- milliseconds per player; protects client-to-server relay usage
-}
-

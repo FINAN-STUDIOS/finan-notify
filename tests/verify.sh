@@ -14,6 +14,13 @@ grep -q "exports('Notify'" client/client.lua
 grep -q "finan_notify:notify" client/client.lua
 grep -q "RegisterNUICallback('ready'" client/client.lua
 grep -q "NotifyPlayer" server/server.lua
+grep -q "maxQueued" config.lua
+grep -q "normalizeNotification" html/app.js
+
+if grep -q "finan_notify:server:notify" server/server.lua README.md; then
+    echo 'Public server notification event must not be present.' >&2
+    exit 1
+fi
 
 if command -v luac >/dev/null 2>&1; then
     luac -p fxmanifest.lua config.lua locales/de.lua locales/en.lua client/client.lua server/server.lua
@@ -21,6 +28,7 @@ fi
 
 if command -v node >/dev/null 2>&1; then
     node --check html/app.js
+    node tests/nui.test.js
 fi
 
 echo 'FINAN Notify verification passed.'

@@ -19,7 +19,7 @@ Integrate it through a client export, client event, server event, or server expo
 - Six configurable screen positions
 - Client and server exports plus event APIs
 - English and German default titles
-- Input limits, safe text rendering, and relay cooldown
+- Input limits, bounded queue, and defense-in-depth NUI validation
 - No dependencies, databases, builds, or permanent loops
 - Editable configuration and locales
 
@@ -38,4 +38,3 @@ Integrate it through a client export, client event, server event, or server expo
 ## Delivery note
 
 Free resource. Licensed for private and commercial FiveM server operation under the FINAN STUDIOS License. Redistribution and resale are not permitted.
-

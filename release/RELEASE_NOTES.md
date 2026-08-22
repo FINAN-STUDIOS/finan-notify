@@ -7,9 +7,11 @@ The first public FINAN STUDIOS resource is ready. FINAN Notify brings a focused 
 - Four clear notification states
 - Dependency-free client and server APIs
 - Responsive queue and stack behavior
+- Bounded waiting queue and strict NUI schema validation
 - Configurable positioning, timing, limits, and motion
 - English and German defaults
 - Event-driven implementation with effectively zero idle script work
+- No public client-to-server notification relay
 
 ## Upgrade notes
 
@@ -22,4 +24,3 @@ This is the initial public release. Keep the resource folder named `finan_notify
 - Release archive root folder: `finan_notify/`
 - Configuration and locales excluded from escrow
 - License and README included in delivery
-
