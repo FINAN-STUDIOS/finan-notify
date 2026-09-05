@@ -2,6 +2,24 @@
 
 All notable changes to FINAN Notify are documented here. This project follows [Semantic Versioning](https://semver.org/).
 
+## [1.0.2] - 2026-09-05
+
+### Fixed
+
+- Removed the forced dark color scheme that could make the embedded NUI canvas opaque
+- Added per-key English fallback for missing, blank, invalid, or unknown locale entries
+- Excluded tests, release collateral, and repository metadata from the Cfx upload archive
+
+### Added
+
+- French (`fr`) and Spanish (`es`) default notification titles
+- Locale, transparency, archive-content, and client-export regression coverage
+- Reproducible minimal Cfx release builder
+
+### Compatibility
+
+- Existing client exports and notification events remain unchanged
+
 ## [1.0.0] - 2026-08-22
 
 ### Added
@@ -22,3 +40,4 @@ All notable changes to FINAN Notify are documented here. This project follows [S
 - Rejected non-finite durations before forwarding data to the NUI
 
 [1.0.0]: https://github.com/FINAN-STUDIOS/finan-notify/releases/tag/v1.0.0
+[1.0.2]: https://github.com/FINAN-STUDIOS/finan-notify/compare/v1.0.0...v1.0.2

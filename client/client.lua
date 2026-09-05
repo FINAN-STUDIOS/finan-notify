@@ -17,8 +17,14 @@ local function cleanText(value, maximumLength)
 end
 
 local function defaultTitle(notificationType)
-    local locale = Locales[Config.Locale] or Locales.en or {}
-    return locale[notificationType] or notificationType
+    local locale = Locales[Config.Locale]
+    local english = Locales.en
+    local translated = type(locale) == 'table' and locale[notificationType] or nil
+    local fallback = type(english) == 'table' and english[notificationType] or nil
+
+    return (type(translated) == 'string' and cleanText(translated, Config.Limits.titleLength))
+        or (type(fallback) == 'string' and cleanText(fallback, Config.Limits.titleLength))
+        or notificationType
 end
 
 local function normalize(payload, title, message, duration)

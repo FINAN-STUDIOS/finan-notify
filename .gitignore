@@ -6,3 +6,4 @@ Thumbs.db
 release/*.zip
 release/*.sha256
 html/preview.html
+dist/

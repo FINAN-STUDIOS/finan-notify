@@ -1,6 +1,6 @@
 Config = {}
 
-Config.Locale = 'en'
+Config.Locale = 'en' -- en, de, fr, es; missing translations fall back to English
 Config.Debug = false
 
 Config.Defaults = {

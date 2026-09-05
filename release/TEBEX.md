@@ -1,4 +1,4 @@
-# Tebex Listing Copy — FINAN Notify 1.0.0
+# Tebex Listing Copy — FINAN Notify 1.0.2
 
 ## Short description
 
@@ -8,7 +8,7 @@ A modern, lightweight notification system for FiveM—standalone and compatible 
 
 Give your server a consistent, professional interface with FINAN Notify. Built as the first public resource from FINAN STUDIOS, it combines a restrained black-and-white design with a small, event-driven runtime and a framework-independent API.
 
-Integrate it through a client export, client event, server event, or server export. FINAN Notify works on standalone servers and fits naturally into ESX, QBCore, and Qbox projects without importing any of them.
+Integrate it through a client export, client event, or server export. FINAN Notify works on standalone servers and fits naturally into ESX, QBCore, and Qbox projects without importing any of them.
 
 ## Feature list
 
@@ -18,7 +18,7 @@ Integrate it through a client export, client event, server event, or server expo
 - Multiple notifications, queueing, and responsive layout
 - Six configurable screen positions
 - Client and server exports plus event APIs
-- English and German default titles
+- English, German, French, and Spanish default titles with English fallback
 - Input limits, bounded queue, and defense-in-depth NUI validation
 - No dependencies, databases, builds, or permanent loops
 - Editable configuration and locales

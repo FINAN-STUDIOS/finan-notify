@@ -1,26 +1,11 @@
-# FINAN Notify v1.0.0
+# FINAN Notify v1.0.2
 
-The first public FINAN STUDIOS resource is ready. FINAN Notify brings a focused black-and-white notification interface to standalone, ESX, QBCore, and Qbox FiveM servers.
+Version 1.0.2 fixes the opaque background that could appear when FINAN Notify was embedded as a FiveM NUI. The forced dark color scheme has been removed while the notification cards retain their original black-and-white design.
 
-## Highlights
+This update also adds French and Spanish default notification titles alongside English and German. Missing, blank, invalid, or unknown translations fall back to English. Existing exports and events remain unchanged.
 
-- Four clear notification states
-- Dependency-free client and server APIs
-- Responsive queue and stack behavior
-- Bounded waiting queue and strict NUI schema validation
-- Configurable positioning, timing, limits, and motion
-- English and German defaults
-- Event-driven implementation with effectively zero idle script work
-- No public client-to-server notification relay
+The downloadable archive is now deliberately minimal and ready for Cfx Asset Escrow processing: development tests, internal release documents, and repository metadata are no longer shipped to customers.
 
-## Upgrade notes
+## Upgrade
 
-This is the initial public release. Keep the resource folder named `finan_notify` and start it before integrations that call its exports.
-
-## Integrity checklist
-
-- Version in `fxmanifest.lua`: `1.0.0`
-- Tag: `v1.0.0`
-- Release archive root folder: `finan_notify/`
-- Configuration and locales excluded from escrow
-- License and README included in delivery
+Back up `config.lua`, replace the resource files, merge your settings, and restart `finan_notify`. Set `Config.Locale` to `en`, `de`, `fr`, or `es`.

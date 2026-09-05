@@ -2,7 +2,7 @@
 
 FINAN Notify is a polished, lightweight notification resource for FiveM. It provides a consistent UI for standalone servers and projects using ESX, QBCore, or Qbox—without requiring any framework.
 
-**Version:** 1.0.0  
+**Version:** 1.0.2
 **Category:** Free Resource  
 **Author:** FINAN STUDIOS
 
@@ -18,7 +18,7 @@ FINAN Notify is a polished, lightweight notification resource for FiveM. It prov
 - Configurable position, duration, dimensions, spacing, and animation speed
 - Input validation and text length limits
 - No runtime dependencies and no polling loops
-- English and German default titles
+- English, German, French, and Spanish default titles with per-key English fallback
 - Asset Escrow-ready manifest with editable configuration and locales
 
 ## Installation
@@ -41,7 +41,7 @@ All public settings are in `config.lua`.
 
 | Setting | Purpose | Default |
 | --- | --- | --- |
-| `Config.Locale` | Default title language (`en` or `de`) | `en` |
+| `Config.Locale` | Default title language (`en`, `de`, `fr`, or `es`) | `en` |
 | `Config.Debug` | Enables rejected-input diagnostics | `false` |
 | `Config.Defaults` | Default type and duration | `info`, `5000` ms |
 | `Config.UI.position` | Stack position on screen | `top-right` |
@@ -169,7 +169,19 @@ Only the four documented lowercase types are accepted and `message` must not be 
 Requested durations are clamped between `Config.Limits.minDuration` and `Config.Limits.maxDuration`.
 
 **The title is unexpected**  
-Omitting `title` uses the matching entry in the configured locale. Add another locale file and set `Config.Locale` to its key to localize it.
+Omitting `title` uses the matching entry in the configured locale. Set `Config.Locale` to `en` (English), `de` (German), `fr` (French), or `es` (Spanish). Missing, blank, invalid, and unknown translations fall back to English. Custom titles and messages supplied by calling resources are not automatically translated.
+
+**A dark full-screen background appears behind the cards**
+
+Update to 1.0.2. It removes the forced dark color scheme from the embedded NUI document while retaining the explicit dark card colors and transparent page canvas.
+
+## Updating from 1.0.0
+
+Back up your configuration, replace the resource files, merge your settings into `config.lua`, and restart `finan_notify`. The client export signatures and event names remain unchanged. Add the new `fr.lua` and `es.lua` locale files.
+
+## Release verification
+
+Run `sh tests/verify.sh` before packaging. Maintainers can build the deliberately minimal Cfx upload archive with `sh scripts/build-release.sh`. The archive contains only runtime files, locales, README, changelog, and license; development tests and release collateral stay in the repository.
 
 ## Performance and security
 
